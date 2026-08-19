@@ -284,56 +284,9 @@ GENERAR INFORME PDF
 
 </div>
 
-<button type="button" id="btnProbarConexion">
-    PROBAR CONEXIÓN
-</button>
-
-<div id="resultadoConexion"></div>
-  
 <script>
 
 const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbwFBRK977J-UWdF9BMZNIw92uPmHc8MW2427C7rgbYHkKTHFqgK99Swlow_wO6UqCTd/exec";
-
-document.getElementById("btnProbarConexion").addEventListener("click", probarConexion);
-
-async function probarConexion() {
-
-    const resultado = document.getElementById("resultadoConexion");
-
-    resultado.innerHTML = "⏳ Probando conexión...";
-    resultado.style.display = "block";
-
-    try {
-
-        console.log("Enviando solicitud a:", URL_APPS_SCRIPT);
-
-        const respuesta = await fetch(URL_APPS_SCRIPT);
-
-        console.log("HTTP:", respuesta.status);
-        console.log("OK:", respuesta.ok);
-
-        if (!respuesta.ok) {
-            throw new Error("HTTP " + respuesta.status);
-        }
-
-        const texto = await respuesta.text();
-
-        console.log("Respuesta:", texto);
-
-        resultado.innerHTML =
-            "✅ CONEXIÓN CORRECTA<br><br>" +
-            "<pre>" + texto + "</pre>";
-
-    } catch (error) {
-
-        console.error("Error completo:", error);
-
-        resultado.innerHTML =
-            "❌ ERROR DE CONEXIÓN<br><br>" +
-            error.message;
-    }
-}
-
 
 function generarInforme() {
 
