@@ -1,431 +1,1703 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
 <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<title>Generador de Informes</title>
+<title>BroxCorp | Generador de Informes</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet">
 
 <style>
 
-:root {
-  --azul: #16273f;
-  --azul2: #1f3a5f;
-  --ambar: #f2a93b;
-  --fondo: #f4f6f9;
-  --borde: #dbe1e8;
-  --texto: #1f2937;
-  --verde: #2e7d32;
-  --rojo: #c0392b;
+:root{
+
+    --azul-oscuro:#14253d;
+    --azul:#1e3a5f;
+
+    --azul-claro:#2f5d8c;
+
+    --dorado:#f2a93b;
+    --dorado-hover:#d99121;
+
+    --verde:#2e7d32;
+    --rojo:#c0392b;
+
+    --fondo:#f4f6f9;
+    --blanco:#ffffff;
+
+    --texto:#1f2937;
+    --texto-suave:#667085;
+
+    --borde:#d9e0e7;
+
+    --radio:12px;
+
+    --sombra:
+        0 4px 18px rgba(20,37,61,.08);
+
+    --sombra-fuerte:
+        0 12px 35px rgba(20,37,61,.13);
 }
 
-* {
-  box-sizing: border-box;
+
+*{
+    box-sizing:border-box;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--fondo);
-  color: var(--texto);
+
+body{
+
+    margin:0;
+
+    font-family:'Inter',
+                Arial,
+                sans-serif;
+
+    background:
+        linear-gradient(
+            180deg,
+            #eef2f6 0,
+            #f7f8fa 100%
+        );
+
+    color:var(--texto);
+
+    min-height:100vh;
 }
 
-header {
-  background:
-    linear-gradient(
-      135deg,
-      var(--azul),
-      var(--azul2)
-    );
 
-  color: white;
-  padding: 30px 20px;
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--azul-oscuro),
+            var(--azul)
+        );
+
+    color:white;
+
+    padding:28px 20px 80px;
+
+    position:relative;
+
+    overflow:hidden;
 }
 
-.contenedor {
-  max-width: 700px;
-  margin: 30px auto;
-  padding: 20px;
+
+header::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:280px;
+    height:280px;
+
+    border-radius:50%;
+
+    right:-90px;
+    top:-120px;
+
+    background:
+        rgba(242,169,59,.16);
 }
 
-.card {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow:
-    0 5px 20px
-    rgba(0,0,0,.08);
+
+header::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    left:-80px;
+    bottom:-120px;
+
+    background:
+        rgba(255,255,255,.05);
 }
 
-h1 {
-  margin: 0;
+
+.header-contenido{
+
+    max-width:950px;
+
+    margin:auto;
+
+    position:relative;
+
+    z-index:2;
 }
 
-h2 {
-  color: var(--azul);
+
+.logo{
+
+    font-family:'Poppins';
+
+    font-size:1.8rem;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    margin-bottom:5px;
 }
 
-label {
-  display: block;
-  font-weight: bold;
-  margin-top: 15px;
-  margin-bottom: 6px;
+
+.logo span{
+
+    color:var(--dorado);
 }
+
+
+.subtitulo{
+
+    color:#d8e1eb;
+
+    font-size:.92rem;
+}
+
+
+/* =====================================================
+   CONTENEDOR
+===================================================== */
+
+.contenedor{
+
+    max-width:950px;
+
+    margin:-50px auto 60px;
+
+    padding:0 18px;
+
+    position:relative;
+
+    z-index:5;
+}
+
+
+/* =====================================================
+   TARJETAS
+===================================================== */
+
+.tarjeta{
+
+    background:white;
+
+    border-radius:var(--radio);
+
+    box-shadow:var(--sombra-fuerte);
+
+    padding:28px;
+
+    margin-bottom:20px;
+}
+
+
+.titulo-tarjeta{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:22px;
+}
+
+
+.icono{
+
+    width:38px;
+    height:38px;
+
+    border-radius:9px;
+
+    background:#eef3f8;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:18px;
+}
+
+
+.titulo-tarjeta h2{
+
+    font-family:'Poppins';
+
+    color:var(--azul-oscuro);
+
+    font-size:1.05rem;
+
+    margin:0;
+}
+
+
+.titulo-tarjeta p{
+
+    margin:3px 0 0;
+
+    color:var(--texto-suave);
+
+    font-size:.78rem;
+}
+
+
+/* =====================================================
+   FORMULARIO
+===================================================== */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:18px;
+}
+
+
+.campo{
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+
+.campo-completo{
+
+    grid-column:
+        1 / -1;
+}
+
+
+label{
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+    margin-bottom:7px;
+
+    color:#344054;
+}
+
 
 input,
 select,
-textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid var(--borde);
-  border-radius: 8px;
-  font-size: 16px;
+textarea{
+
+    width:100%;
+
+    border:1.5px solid var(--borde);
+
+    border-radius:8px;
+
+    padding:12px 13px;
+
+    background:#fbfcfd;
+
+    color:var(--texto);
+
+    font-family:inherit;
+
+    font-size:.92rem;
+
+    transition:
+        border-color .2s,
+        box-shadow .2s,
+        background .2s;
 }
 
-textarea {
-  min-height: 100px;
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    outline:none;
+
+    border-color:var(--azul);
+
+    background:white;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(30,58,95,.10);
 }
 
-button {
-  width: 100%;
-  margin-top: 20px;
-  padding: 15px;
-  border: 0;
-  border-radius: 8px;
-  background: var(--ambar);
-  color: var(--azul);
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
+
+textarea{
+
+    min-height:100px;
+
+    resize:vertical;
 }
 
-button:disabled {
-  opacity: .5;
+
+.ayuda{
+
+    margin-top:5px;
+
+    font-size:.72rem;
+
+    color:var(--texto-suave);
 }
 
-.resultado {
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 20px;
+
+/* =====================================================
+   CAMPOS OPCIONALES
+===================================================== */
+
+.badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    padding:4px 9px;
+
+    border-radius:20px;
+
+    background:#fff4e2;
+
+    color:#a96810;
+
+    font-size:.68rem;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.04em;
 }
 
-.ok {
-  background: #eaf7ec;
-  color: var(--verde);
+
+/* =====================================================
+   BOTONES
+===================================================== */
+
+.botones{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:12px;
+
+    margin-top:25px;
 }
 
-.error {
-  background: #fdecea;
-  color: var(--rojo);
+
+button{
+
+    border:none;
+
+    border-radius:9px;
+
+    padding:14px 18px;
+
+    font-family:'Poppins';
+
+    font-size:.88rem;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:
+        transform .1s,
+        background .2s,
+        opacity .2s;
 }
 
-.oculto {
-  display: none;
+
+button:active{
+
+    transform:scale(.99);
+}
+
+
+.btn-principal{
+
+    background:var(--dorado);
+
+    color:var(--azul-oscuro);
+}
+
+
+.btn-principal:hover{
+
+    background:var(--dorado-hover);
+}
+
+
+.btn-secundario{
+
+    background:white;
+
+    border:1.5px solid var(--borde);
+
+    color:var(--azul-oscuro);
+}
+
+
+.btn-secundario:hover{
+
+    background:#f6f8fa;
+}
+
+
+button:disabled{
+
+    opacity:.55;
+
+    cursor:not-allowed;
+}
+
+
+/* =====================================================
+   ESTADO
+===================================================== */
+
+.estado{
+
+    display:none;
+
+    margin-top:20px;
+
+    padding:15px;
+
+    border-radius:9px;
+
+    font-size:.85rem;
+
+    line-height:1.5;
+}
+
+
+.estado.visible{
+
+    display:block;
+}
+
+
+.estado.cargando{
+
+    background:#eef3f8;
+
+    color:var(--azul);
+}
+
+
+.estado.ok{
+
+    background:#eaf7ec;
+
+    color:var(--verde);
+}
+
+
+.estado.error{
+
+    background:#fdecea;
+
+    color:var(--rojo);
+}
+
+
+/* =====================================================
+   RESULTADOS
+===================================================== */
+
+.resultado{
+
+    display:none;
+
+    margin-top:20px;
+
+    border-top:1px solid var(--borde);
+
+    padding-top:20px;
+}
+
+
+.resultado.visible{
+
+    display:block;
+}
+
+
+.resultado-titulo{
+
+    font-family:'Poppins';
+
+    color:var(--azul-oscuro);
+
+    font-size:.95rem;
+
+    margin-bottom:14px;
+}
+
+
+.enlaces{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:12px;
+}
+
+
+.enlace{
+
+    padding:14px;
+
+    border:1px solid var(--borde);
+
+    border-radius:9px;
+
+    text-decoration:none;
+
+    color:var(--azul);
+
+    background:#fbfcfd;
+
+    font-size:.82rem;
+
+    font-weight:600;
+}
+
+
+.enlace:hover{
+
+    background:#f1f5f9;
+
+    border-color:#bfcbd7;
+}
+
+
+/* =====================================================
+   INFORMACIÓN ISO
+===================================================== */
+
+.info-iso{
+
+    background:#f7f9fb;
+
+    border-left:
+        4px solid var(--azul);
+
+    padding:14px 16px;
+
+    border-radius:7px;
+
+    font-size:.78rem;
+
+    color:#52606d;
+
+    line-height:1.6;
+
+    margin-top:20px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    text-align:center;
+
+    color:#7a8594;
+
+    font-size:.72rem;
+
+    padding:0 20px 30px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:700px){
+
+    .grid{
+
+        grid-template-columns:1fr;
+    }
+
+
+    .campo-completo{
+
+        grid-column:auto;
+    }
+
+
+    .botones{
+
+        grid-template-columns:1fr;
+    }
+
+
+    .enlaces{
+
+        grid-template-columns:1fr;
+    }
+
+
+    .tarjeta{
+
+        padding:21px;
+    }
+
+
+    .logo{
+
+        font-size:1.5rem;
+    }
+
 }
 
 </style>
 
 </head>
 
+
 <body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <header>
 
-<h1>
-Generador de Informe de Cierre
-</h1>
+    <div class="header-contenido">
 
-<p>
-Desimplementación de proyectos
-</p>
+        <div class="logo">
+            BROX<span>CORP</span>
+        </div>
+
+        <div class="subtitulo">
+            Sistema de generación de informes de cierre de proyectos
+        </div>
+
+    </div>
 
 </header>
 
 
 <div class="contenedor">
 
-<div class="card">
 
-<h2>
-Datos del proyecto
-</h2>
+<!-- =====================================================
+     INFORMACIÓN DEL PROYECTO
+===================================================== -->
+
+<div class="tarjeta">
+
+    <div class="titulo-tarjeta">
+
+        <div class="icono">
+            📋
+        </div>
+
+        <div>
+
+            <h2>
+                Datos del proyecto
+            </h2>
+
+            <p>
+                Información principal que aparecerá en la portada
+                y en la trazabilidad documental.
+            </p>
+
+        </div>
+
+    </div>
 
 
-<label>
-Proyecto
-</label>
-
-<select id="proyecto">
-
-<option value="125977">
-125977 - Arequipa
-</option>
-
-</select>
+    <div class="grid">
 
 
-<label>
-Responsable
-</label>
+        <div class="campo">
 
-<input
-  id="responsable"
-  value="Juan Pérez"
->
+            <label>
+                Código del proyecto
+            </label>
+
+            <input
+                type="text"
+                id="codigo"
+                value="90.10.01_ARQ_125977"
+                placeholder="Ej. 90.10.01_ARQ_125977"
+            >
+
+            <span class="ayuda">
+                Código único del proyecto.
+            </span>
+
+        </div>
 
 
-<label>
-Fecha de ejecución
-</label>
+        <div class="campo">
 
-<input
-  id="fecha"
-  value="12/08/2026 al 14/08/2026"
->
+            <label>
+                Código de tienda
+            </label>
+
+            <input
+                type="text"
+                id="tienda"
+                value="125977"
+                placeholder="Ej. 125977"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>
+                Nombre del proyecto
+            </label>
+
+            <input
+                type="text"
+                id="nombreProyecto"
+                value="Desimplementación de Tienda 125977"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>
+                Sede
+            </label>
+
+            <input
+                type="text"
+                id="sede"
+                value="Arequipa"
+                placeholder="Ej. Arequipa"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>
+                Fecha de ejecución
+            </label>
+
+            <input
+                type="text"
+                id="fechaEjecucion"
+                value="12/08/2026 al 14/08/2026"
+                placeholder="Ej. 12/08/2026 al 14/08/2026"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>
+                Responsable del proyecto
+            </label>
+
+            <input
+                type="text"
+                id="responsable"
+                value="Responsable de Proyecto"
+                placeholder="Nombre del responsable"
+            >
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     RESTAURACIÓN / PINTADO
+===================================================== -->
+
+<div class="tarjeta">
+
+    <div class="titulo-tarjeta">
+
+        <div class="icono">
+            🎨
+        </div>
+
+        <div>
+
+            <h2>
+                Restauración y pintado
+            </h2>
+
+            <p>
+                Estos datos se utilizarán para generar automáticamente
+                el texto técnico de la sección.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="campo">
+
+            <label>
+                Área pintada (m²)
+            </label>
+
+            <input
+                type="number"
+                id="areaPintada"
+                min="0"
+                step="0.01"
+                placeholder="Ej. 120"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>
+                Tipo de pintura
+            </label>
+
+            <input
+                type="text"
+                id="tipoPintura"
+                placeholder="Ej. Pintura látex"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>
+                Color aplicado
+            </label>
+
+            <input
+                type="text"
+                id="color"
+                placeholder="Ej. Blanco humo"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>
+                Estado final
+            </label>
+
+            <select id="estadoFinal">
+
+                <option value="">
+                    Seleccionar
+                </option>
+
+                <option value="Conforme">
+                    Conforme
+                </option>
+
+                <option value="Conforme con observaciones">
+                    Conforme con observaciones
+                </option>
+
+                <option value="Pendiente">
+                    Pendiente
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="campo campo-completo">
+
+            <label>
+                Observaciones de restauración
+                <span class="badge">
+                    opcional
+                </span>
+            </label>
+
+            <textarea
+                id="observacionesRestauracion"
+                placeholder="Ej. Se verificó uniformidad de acabado y ausencia de daños visibles."
+            ></textarea>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     INFORMACIÓN ADICIONAL
+===================================================== -->
+
+<div class="tarjeta">
+
+    <div class="titulo-tarjeta">
+
+        <div class="icono">
+            📝
+        </div>
+
+        <div>
+
+            <h2>
+                Información adicional
+            </h2>
+
+            <p>
+                Campos opcionales para complementar el informe.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="campo campo-completo">
+
+            <label>
+                Observaciones generales
+            </label>
+
+            <textarea
+                id="observacionesGenerales"
+                placeholder="Información adicional que deba aparecer en el informe..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>
+                Conclusión adicional
+            </label>
+
+            <textarea
+                id="conclusionAdicional"
+                placeholder="Conclusión adicional..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>
+                Recomendación adicional
+            </label>
+
+            <textarea
+                id="recomendacionAdicional"
+                placeholder="Recomendación adicional..."
+            ></textarea>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     ACCIONES
+===================================================== -->
+
+<div class="tarjeta">
+
+    <div class="titulo-tarjeta">
+
+        <div class="icono">
+            ⚙️
+        </div>
+
+        <div>
+
+            <h2>
+                Generación del informe
+            </h2>
+
+            <p>
+                El sistema buscará automáticamente las evidencias
+                almacenadas en Google Drive.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="botones">
+
+        <button
+            type="button"
+            id="btnConexion"
+            class="btn-secundario">
+
+            🔌 PROBAR CONEXIÓN
+
+        </button>
+
+
+        <button
+            type="button"
+            id="btnGenerar"
+            class="btn-principal">
+
+            📄 GENERAR INFORME PDF
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="estado"
+        class="estado">
+    </div>
+
+
+    <div
+        id="resultado"
+        class="resultado">
+
+        <div class="resultado-titulo">
+
+            Informe generado correctamente
+
+        </div>
+
+
+        <div class="enlaces">
+
+
+            <a
+                id="linkDocumento"
+                class="enlace"
+                href="#"
+                target="_blank">
+
+                📘 Abrir Google Docs
+
+            </a>
+
+
+            <a
+                id="linkPdf"
+                class="enlace"
+                href="#"
+                target="_blank">
+
+                📄 Abrir PDF
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="info-iso">
+
+        <strong>Control documental:</strong>
+
+        El informe es generado a partir de una plantilla controlada
+        y de las evidencias almacenadas en Google Drive.
+        El documento generado puede ser posteriormente incorporado
+        al repositorio oficial de Control Documentario.
+
+    </div>
+
+</div>
 
 
 </div>
 
 
-<div class="card">
+<footer>
 
-<h2>
-Restauración
-</h2>
+    BROXCORP · Sistema de Gestión Documental ·
+    Generación de informes de proyectos
 
-
-<label>
-¿Se realizó pintado?
-</label>
-
-<select id="pintado">
-
-<option value="si">
-Sí
-</option>
-
-<option value="no">
-No
-</option>
-
-</select>
+</footer>
 
 
-<label>
-Área pintada (m²)
-</label>
-
-<input
-  id="areaPintada"
-  type="number"
-  value="125"
->
-
-
-<label>
-Tipo de pintura
-</label>
-
-<input
-  id="tipoPintura"
-  value="Pintura látex"
->
-
-
-<label>
-Color
-</label>
-
-<input
-  id="color"
-  value="Gris RAL 7035"
->
-
-
-</div>
-
-
-<div class="card">
-
-<h2>
-Generar informe
-</h2>
-
-<p>
-El sistema buscará automáticamente las evidencias
-del proyecto y generará el informe.
-</p>
-
-
-<button
-  id="btnGenerar"
-  onclick="generarInforme()"
->
-
-GENERAR INFORME PDF
-
-</button>
-
-
-<div
-  id="resultado"
-  class="resultado oculto"
->
-</div>
-
-</div>
-
-</div>
 
 <script>
 
-const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbwuvG4gLQuW-Xg5KQRo5-Fe5w1SM7RHYXKK4EdNe4GhB49vtSapPqteuPIhwdhj7wyC/exec";
+/* ============================================================
+   CONFIGURACIÓN
+============================================================ */
 
-function generarInforme() {
 
-  const boton =
+/*
+ * URL DEL GOOGLE APPS SCRIPT
+ *
+ * IMPORTANTE:
+ * Coloca aquí la URL /exec de tu implementación.
+ */
+
+const CONFIG = {
+
+    APPS_SCRIPT_URL:
+        "https://script.google.com/macros/s/TU_ID_DEL_SCRIPT/exec"
+
+};
+
+
+/* ============================================================
+   ELEMENTOS
+============================================================ */
+
+const btnConexion =
+    document.getElementById("btnConexion");
+
+const btnGenerar =
     document.getElementById("btnGenerar");
 
-  const resultado =
+const estado =
+    document.getElementById("estado");
+
+const resultado =
     document.getElementById("resultado");
 
+const linkDocumento =
+    document.getElementById("linkDocumento");
 
-  boton.disabled = true;
-
-  resultado.className =
-    "resultado";
-
-  resultado.innerHTML =
-    "Generando informe...";
+const linkPdf =
+    document.getElementById("linkPdf");
 
 
-  const datos = {
+/* ============================================================
+   UTILIDADES
+============================================================ */
 
-    proyecto:
-      document.getElementById("proyecto").value,
+function mostrarEstado(
+    mensaje,
+    tipo
+){
 
-    responsable:
-      document.getElementById("responsable").value,
+    estado.textContent =
+        mensaje;
 
-    fecha:
-      document.getElementById("fecha").value,
-
-    pintado:
-      document.getElementById("pintado").value,
-
-    areaPintada:
-      document.getElementById("areaPintada").value,
-
-    tipoPintura:
-      document.getElementById("tipoPintura").value,
-
-    color:
-      document.getElementById("color").value
-
-  };
+    estado.className =
+        "estado visible " + tipo;
+}
 
 
-  fetch(
-    URL_APPS_SCRIPT,
-    {
-      method: "POST",
+function ocultarResultado(){
 
-      headers: {
-        "Content-Type":
-          "text/plain;charset=utf-8"
-      },
-
-      body:
-        JSON.stringify(datos)
-
-    }
-  )
-
-  .then(
-    response =>
-      response.json()
-  )
-
-  .then(
-    data => {
-
-      if (
-        data.resultado !== "OK"
-      ) {
-
-        throw new Error(
-          data.mensaje ||
-          "No se pudo generar el informe."
-        );
-
-      }
-
-
-      resultado.className =
-        "resultado ok";
-
-
-      resultado.innerHTML = `
-
-        <strong>
-        Informe generado correctamente.
-        </strong>
-
-        <br><br>
-
-        <a
-          href="${data.documentoUrl}"
-          target="_blank"
-        >
-          Abrir Google Docs
-        </a>
-
-        <br><br>
-
-        <a
-          href="${data.pdfUrl}"
-          target="_blank"
-        >
-          Abrir PDF
-        </a>
-
-      `;
-
-    }
-  )
-
-  .catch(
-    error => {
-
-      resultado.className =
-        "resultado error";
-
-      resultado.innerHTML =
-        "Error: " +
-        error.message;
-
-    }
-  )
-
-  .finally(
-    () => {
-
-      boton.disabled = false;
-
-    }
-  );
+    resultado.classList.remove(
+        "visible"
+    );
 
 }
+
+
+/* ============================================================
+   PROBAR CONEXIÓN
+============================================================ */
+
+btnConexion.addEventListener(
+    "click",
+    probarConexion
+);
+
+
+async function probarConexion(){
+
+    btnConexion.disabled =
+        true;
+
+    mostrarEstado(
+        "🔄 Verificando conexión con Google Apps Script...",
+        "cargando"
+    );
+
+    ocultarResultado();
+
+
+    try{
+
+        const respuesta =
+            await fetch(
+                CONFIG.APPS_SCRIPT_URL +
+                "?accion=ping",
+                {
+                    method:"GET",
+                    cache:"no-store"
+                }
+            );
+
+
+        if(!respuesta.ok){
+
+            throw new Error(
+                "HTTP " +
+                respuesta.status
+            );
+
+        }
+
+
+        const data =
+            await respuesta.json();
+
+
+        if(data.estado === "OK" || data.ok === true){
+
+            mostrarEstado(
+                "✔ Conexión correcta. Google Apps Script responde correctamente.",
+                "ok"
+            );
+
+        }else{
+
+            mostrarEstado(
+                "⚠ Google Apps Script respondió, pero no con el formato esperado.",
+                "error"
+            );
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "Error de conexión:",
+            error
+        );
+
+
+        mostrarEstado(
+            "❌ No se pudo conectar con Google Apps Script. " +
+            error.message,
+            "error"
+        );
+
+    }
+    finally{
+
+        btnConexion.disabled =
+            false;
+
+    }
+
+}
+
+
+/* ============================================================
+   GENERAR INFORME
+============================================================ */
+
+btnGenerar.addEventListener(
+    "click",
+    generarInforme
+);
+
+
+async function generarInforme(){
+
+    ocultarResultado();
+
+
+    /*
+     * Validaciones básicas
+     */
+
+    const codigo =
+        document.getElementById(
+            "codigo"
+        ).value.trim();
+
+
+    const nombreProyecto =
+        document.getElementById(
+            "nombreProyecto"
+        ).value.trim();
+
+
+    const sede =
+        document.getElementById(
+            "sede"
+        ).value.trim();
+
+
+    if(!codigo){
+
+        mostrarEstado(
+            "⚠ Ingresa el código del proyecto.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!nombreProyecto){
+
+        mostrarEstado(
+            "⚠ Ingresa el nombre del proyecto.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!sede){
+
+        mostrarEstado(
+            "⚠ Ingresa la sede.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    btnGenerar.disabled =
+        true;
+
+    btnConexion.disabled =
+        true;
+
+
+    mostrarEstado(
+        "⏳ Generando informe. El sistema está buscando las evidencias en Google Drive...",
+        "cargando"
+    );
+
+
+    /*
+     * ========================================================
+     * PAYLOAD
+     * ========================================================
+     *
+     * Estos datos son enviados a Google Apps Script.
+     */
+
+    const datos = {
+
+        proyecto: {
+
+            codigo:
+                codigo,
+
+            nombre:
+                nombreProyecto,
+
+            sede:
+                sede,
+
+            fechaEjecucion:
+                document.getElementById(
+                    "fechaEjecucion"
+                ).value.trim(),
+
+            responsable:
+                document.getElementById(
+                    "responsable"
+                ).value.trim(),
+
+            tienda:
+                document.getElementById(
+                    "tienda"
+                ).value.trim()
+
+        },
+
+
+        /*
+         * Datos de restauración
+         */
+
+        areaPintada:
+            document.getElementById(
+                "areaPintada"
+            ).value,
+
+        tipoPintura:
+            document.getElementById(
+                "tipoPintura"
+            ).value.trim(),
+
+        color:
+            document.getElementById(
+                "color"
+            ).value.trim(),
+
+
+        estadoFinal:
+            document.getElementById(
+                "estadoFinal"
+            ).value,
+
+
+        observacionesRestauracion:
+            document.getElementById(
+                "observacionesRestauracion"
+            ).value.trim(),
+
+
+        observacionesGenerales:
+            document.getElementById(
+                "observacionesGenerales"
+            ).value.trim(),
+
+
+        conclusionAdicional:
+            document.getElementById(
+                "conclusionAdicional"
+            ).value.trim(),
+
+
+        recomendacionAdicional:
+            document.getElementById(
+                "recomendacionAdicional"
+            ).value.trim()
+
+    };
+
+
+    console.log(
+        "Datos enviados:",
+        datos
+    );
+
+
+    try{
+
+        /*
+         * IMPORTANTE:
+         *
+         * No utilizar application/json.
+         *
+         * text/plain evita el preflight OPTIONS
+         * que normalmente genera problemas con Apps Script.
+         */
+
+        const respuesta =
+            await fetch(
+                CONFIG.APPS_SCRIPT_URL,
+                {
+
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "text/plain;charset=utf-8"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            datos
+                        )
+
+                }
+            );
+
+
+        if(!respuesta.ok){
+
+            throw new Error(
+                "Google Apps Script respondió HTTP " +
+                respuesta.status
+            );
+
+        }
+
+
+        const data =
+            await respuesta.json();
+
+
+        console.log(
+            "Respuesta:",
+            data
+        );
+
+
+        if(
+            data.resultado !==
+            "OK"
+        ){
+
+            throw new Error(
+                data.mensaje ||
+                "El servidor no pudo generar el informe."
+            );
+
+        }
+
+
+        /*
+         * ====================================================
+         * ÉXITO
+         * ====================================================
+         */
+
+        mostrarEstado(
+            "✔ Informe generado correctamente.",
+            "ok"
+        );
+
+
+        /*
+         * Mostrar documento
+         */
+
+        if(data.documentoUrl){
+
+            linkDocumento.href =
+                data.documentoUrl;
+
+            linkDocumento.style.display =
+                "block";
+
+        }else{
+
+            linkDocumento.style.display =
+                "none";
+
+        }
+
+
+        /*
+         * Mostrar PDF
+         */
+
+        if(data.pdfUrl){
+
+            linkPdf.href =
+                data.pdfUrl;
+
+            linkPdf.style.display =
+                "block";
+
+        }else{
+
+            linkPdf.style.display =
+                "none";
+
+        }
+
+
+        resultado.classList.add(
+            "visible"
+        );
+
+
+    }
+    catch(error){
+
+        console.error(
+            "Error generando informe:",
+            error
+        );
+
+
+        mostrarEstado(
+            "❌ Error al generar el informe: " +
+            error.message,
+            "error"
+        );
+
+    }
+    finally{
+
+        btnGenerar.disabled =
+            false;
+
+        btnConexion.disabled =
+            false;
+
+    }
+
+}
+
+
+/* ============================================================
+   CARGA INICIAL
+============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        console.log(
+            "Sistema de informes BroxCorp iniciado."
+        );
+
+    }
+);
 
 </script>
 
 </body>
-
 </html>
