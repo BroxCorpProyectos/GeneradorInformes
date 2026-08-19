@@ -284,40 +284,53 @@ GENERAR INFORME PDF
 
 </div>
 
-<button type="button" onclick="probarConexion()">
+<button type="button" id="btnProbarConexion">
     PROBAR CONEXIÓN
 </button>
+
+<div id="resultadoConexion"></div>
   
 <script>
 
+const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbxgtyieLDwQHM6RkmsBfSDHetcy0NMCfajRo8K7W-MGrqgpZNEr8zDa-uwqbnyzbCJV/exec";
+
+document.getElementById("btnProbarConexion").addEventListener("click", probarConexion);
+
 async function probarConexion() {
 
-    const mensaje = document.getElementById("mensaje");
+    const resultado = document.getElementById("resultadoConexion");
 
-    mensaje.style.display = "block";
-    mensaje.textContent = "Probando conexión...";
+    resultado.innerHTML = "⏳ Probando conexión...";
+    resultado.style.display = "block";
 
     try {
 
+        console.log("Enviando solicitud a:", URL_APPS_SCRIPT);
+
         const respuesta = await fetch(URL_APPS_SCRIPT);
+
+        console.log("HTTP:", respuesta.status);
+        console.log("OK:", respuesta.ok);
 
         if (!respuesta.ok) {
             throw new Error("HTTP " + respuesta.status);
         }
 
-        const datos = await respuesta.json();
+        const texto = await respuesta.text();
 
-        console.log(datos);
+        console.log("Respuesta:", texto);
 
-        mensaje.textContent =
-            "✅ Conexión correcta: " + datos.mensaje;
+        resultado.innerHTML =
+            "✅ CONEXIÓN CORRECTA<br><br>" +
+            "<pre>" + texto + "</pre>";
 
     } catch (error) {
 
-        console.error(error);
+        console.error("Error completo:", error);
 
-        mensaje.textContent =
-            "❌ Error: " + error.message;
+        resultado.innerHTML =
+            "❌ ERROR DE CONEXIÓN<br><br>" +
+            error.message;
     }
 }
 
