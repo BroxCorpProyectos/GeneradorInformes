@@ -75,10 +75,6 @@ body{
 }
 
 
-/* =====================================================
-   HEADER
-===================================================== */
-
 header{
 
     background:
@@ -176,10 +172,6 @@ header::after{
 }
 
 
-/* =====================================================
-   CONTENEDOR
-===================================================== */
-
 .contenedor{
 
     max-width:950px;
@@ -193,10 +185,6 @@ header::after{
     z-index:5;
 }
 
-
-/* =====================================================
-   TARJETAS
-===================================================== */
 
 .tarjeta{
 
@@ -264,10 +252,6 @@ header::after{
     font-size:.78rem;
 }
 
-
-/* =====================================================
-   FORMULARIO
-===================================================== */
 
 .grid{
 
@@ -368,10 +352,6 @@ textarea{
 }
 
 
-/* =====================================================
-   CAMPOS OPCIONALES
-===================================================== */
-
 .badge{
 
     display:inline-flex;
@@ -396,9 +376,13 @@ textarea{
 }
 
 
-/* =====================================================
-   BOTONES
-===================================================== */
+.badge-requerido{
+
+    background:#fdecea;
+
+    color:var(--rojo);
+}
+
 
 .botones{
 
@@ -480,10 +464,6 @@ button:disabled{
 }
 
 
-/* =====================================================
-   ESTADO
-===================================================== */
-
 .estado{
 
     display:none;
@@ -529,10 +509,6 @@ button:disabled{
     color:var(--rojo);
 }
 
-
-/* =====================================================
-   RESULTADOS
-===================================================== */
 
 .resultado{
 
@@ -603,10 +579,6 @@ button:disabled{
 }
 
 
-/* =====================================================
-   INFORMACIÓN ISO
-===================================================== */
-
 .info-iso{
 
     background:#f7f9fb;
@@ -628,10 +600,6 @@ button:disabled{
 }
 
 
-/* =====================================================
-   FOOTER
-===================================================== */
-
 footer{
 
     text-align:center;
@@ -641,6 +609,98 @@ footer{
     font-size:.72rem;
 
     padding:0 20px 30px;
+}
+
+
+/* =====================================================
+   PUNTOS ADICIONALES (dinámicos)
+===================================================== */
+
+.punto-adicional{
+
+    border:1.5px solid var(--borde);
+
+    border-radius:10px;
+
+    padding:18px;
+
+    margin-bottom:14px;
+
+    background:#fbfcfd;
+
+    position:relative;
+}
+
+
+.punto-adicional .grid{
+
+    gap:14px;
+}
+
+
+.btn-quitar{
+
+    position:absolute;
+
+    top:12px;
+
+    right:12px;
+
+    background:none;
+
+    border:none;
+
+    color:var(--rojo);
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+    padding:4px 8px;
+
+    cursor:pointer;
+}
+
+
+.btn-quitar:hover{
+
+    text-decoration:underline;
+}
+
+
+.btn-agregar-punto{
+
+    background:#eef3f8;
+
+    color:var(--azul);
+
+    border:1.5px dashed #bfcbd7;
+
+    width:100%;
+
+    padding:12px;
+
+    font-family:'Poppins';
+
+    font-size:.85rem;
+}
+
+
+.btn-agregar-punto:hover{
+
+    background:#e4ebf3;
+}
+
+
+.vacio-puntos{
+
+    text-align:center;
+
+    color:var(--texto-suave);
+
+    font-size:.8rem;
+
+    padding:10px 0 16px;
 }
 
 
@@ -695,10 +755,6 @@ footer{
 <body>
 
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
 <header>
 
     <div class="header-contenido">
@@ -727,21 +783,11 @@ footer{
 
     <div class="titulo-tarjeta">
 
-        <div class="icono">
-            📋
-        </div>
+        <div class="icono">📋</div>
 
         <div>
-
-            <h2>
-                Datos del proyecto
-            </h2>
-
-            <p>
-                Información principal que aparecerá en la portada
-                y en la trazabilidad documental.
-            </p>
-
+            <h2>Datos del proyecto</h2>
+            <p>Información principal que aparecerá en la portada y en la trazabilidad documental.</p>
         </div>
 
     </div>
@@ -749,105 +795,50 @@ footer{
 
     <div class="grid">
 
+        <div class="campo">
+            <label>Código del proyecto</label>
+            <input type="text" id="codigo" placeholder="Ej. 90.10.01_ARQ_125977">
+        </div>
 
         <div class="campo">
+            <label>Código de tienda</label>
+            <input type="text" id="tienda" placeholder="Ej. 125977">
+        </div>
 
+        <div class="campo">
+            <label>Nombre del proyecto</label>
+            <input type="text" id="nombreProyecto" placeholder="Ej. Desimplementación de Tienda 125977">
+        </div>
+
+        <div class="campo">
+            <label>Sede</label>
+            <input type="text" id="sede" placeholder="Ej. Arequipa">
+        </div>
+
+        <div class="campo">
+            <label>Fecha de ejecución</label>
+            <input type="text" id="fechaEjecucion" placeholder="Ej. 12/08/2026 al 14/08/2026">
+        </div>
+
+        <div class="campo">
+            <label>Responsable del proyecto</label>
+            <input type="text" id="responsable" placeholder="Nombre del responsable">
+        </div>
+
+        <div class="campo campo-completo">
             <label>
-                Código del proyecto
+                Carpeta del proyecto en Drive
+                <span class="badge badge-requerido">requerido</span>
             </label>
-
-            <input
-                type="text"
-                id="codigo"
-                value="90.10.01_ARQ_125977"
-                placeholder="Ej. 90.10.01_ARQ_125977"
-            >
-
+            <input type="text" id="carpetaDrive"
+                   placeholder="Pega aquí el enlace de la carpeta de esta tienda (la que contiene 01_FOTOS y 02_VIDEOS)">
             <span class="ayuda">
-                Código único del proyecto.
+                Es la carpeta específica de esta tienda en Drive. El sistema
+                busca dentro de ella las subcarpetas 01_FOTOS y 02_VIDEOS.
+                Así el mismo formulario sirve para cualquier tienda, sin
+                reconfigurar nada.
             </span>
-
         </div>
-
-
-        <div class="campo">
-
-            <label>
-                Código de tienda
-            </label>
-
-            <input
-                type="text"
-                id="tienda"
-                value="125977"
-                placeholder="Ej. 125977"
-            >
-
-        </div>
-
-
-        <div class="campo">
-
-            <label>
-                Nombre del proyecto
-            </label>
-
-            <input
-                type="text"
-                id="nombreProyecto"
-                value="Desimplementación de Tienda 125977"
-            >
-
-        </div>
-
-
-        <div class="campo">
-
-            <label>
-                Sede
-            </label>
-
-            <input
-                type="text"
-                id="sede"
-                value="Arequipa"
-                placeholder="Ej. Arequipa"
-            >
-
-        </div>
-
-
-        <div class="campo">
-
-            <label>
-                Fecha de ejecución
-            </label>
-
-            <input
-                type="text"
-                id="fechaEjecucion"
-                value="12/08/2026 al 14/08/2026"
-                placeholder="Ej. 12/08/2026 al 14/08/2026"
-            >
-
-        </div>
-
-
-        <div class="campo">
-
-            <label>
-                Responsable del proyecto
-            </label>
-
-            <input
-                type="text"
-                id="responsable"
-                value="Responsable de Proyecto"
-                placeholder="Nombre del responsable"
-            >
-
-        </div>
-
 
     </div>
 
@@ -862,21 +853,11 @@ footer{
 
     <div class="titulo-tarjeta">
 
-        <div class="icono">
-            🎨
-        </div>
+        <div class="icono">🎨</div>
 
         <div>
-
-            <h2>
-                Restauración y pintado
-            </h2>
-
-            <p>
-                Estos datos se utilizarán para generar automáticamente
-                el texto técnico de la sección.
-            </p>
-
+            <h2>Restauración de fachada</h2>
+            <p>Estos datos se utilizarán para generar automáticamente el texto técnico de la sección.</p>
         </div>
 
     </div>
@@ -884,101 +865,75 @@ footer{
 
     <div class="grid">
 
-
         <div class="campo">
-
-            <label>
-                Área pintada (m²)
-            </label>
-
-            <input
-                type="number"
-                id="areaPintada"
-                min="0"
-                step="0.01"
-                placeholder="Ej. 120"
-            >
-
+            <label>Área pintada (m²)</label>
+            <input type="number" id="areaPintada" min="0" step="0.01" placeholder="Ej. 120">
         </div>
 
-
         <div class="campo">
-
-            <label>
-                Tipo de pintura
-            </label>
-
-            <input
-                type="text"
-                id="tipoPintura"
-                placeholder="Ej. Pintura látex"
-            >
-
+            <label>Tipo de pintura</label>
+            <input type="text" id="tipoPintura" placeholder="Ej. Pintura látex">
         </div>
 
-
         <div class="campo">
-
-            <label>
-                Color aplicado
-            </label>
-
-            <input
-                type="text"
-                id="color"
-                placeholder="Ej. Blanco humo"
-            >
-
+            <label>Color aplicado</label>
+            <input type="text" id="color" placeholder="Ej. Blanco humo">
         </div>
 
-
         <div class="campo">
-
-            <label>
-                Estado final
-            </label>
-
+            <label>Estado final</label>
             <select id="estadoFinal">
-
-                <option value="">
-                    Seleccionar
-                </option>
-
-                <option value="Conforme">
-                    Conforme
-                </option>
-
-                <option value="Conforme con observaciones">
-                    Conforme con observaciones
-                </option>
-
-                <option value="Pendiente">
-                    Pendiente
-                </option>
-
+                <option value="">Seleccionar</option>
+                <option value="Conforme">Conforme</option>
+                <option value="Conforme con observaciones">Conforme con observaciones</option>
+                <option value="Pendiente">Pendiente</option>
             </select>
-
         </div>
-
 
         <div class="campo campo-completo">
-
             <label>
                 Observaciones de restauración
-                <span class="badge">
-                    opcional
-                </span>
+                <span class="badge">opcional</span>
             </label>
-
-            <textarea
-                id="observacionesRestauracion"
-                placeholder="Ej. Se verificó uniformidad de acabado y ausencia de daños visibles."
-            ></textarea>
-
+            <textarea id="observacionesRestauracion"
+                placeholder="Ej. Se verificó uniformidad de acabado y ausencia de daños visibles."></textarea>
         </div>
 
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     PUNTOS ADICIONALES (escalabilidad sin tocar código)
+===================================================== -->
+
+<div class="tarjeta">
+
+    <div class="titulo-tarjeta">
+
+        <div class="icono">➕</div>
+
+        <div>
+            <h2>Puntos adicionales</h2>
+            <p>
+                ¿Este proyecto tuvo una actividad que no está en el flujo
+                estándar? Agrégala aquí, sin tocar el código. Si no tiene
+                fotos ni videos, igual se incluirá si escribes un texto.
+            </p>
+        </div>
 
     </div>
+
+    <div id="listaPuntosAdicionales">
+        <div class="vacio-puntos" id="vacioPuntos">
+            No se han agregado puntos adicionales.
+        </div>
+    </div>
+
+    <button type="button" class="btn-agregar-punto" id="btnAgregarPunto">
+        + Agregar punto adicional
+    </button>
 
 </div>
 
@@ -991,20 +946,11 @@ footer{
 
     <div class="titulo-tarjeta">
 
-        <div class="icono">
-            📝
-        </div>
+        <div class="icono">📝</div>
 
         <div>
-
-            <h2>
-                Información adicional
-            </h2>
-
-            <p>
-                Campos opcionales para complementar el informe.
-            </p>
-
+            <h2>Información adicional</h2>
+            <p>Campos opcionales para complementar el informe.</p>
         </div>
 
     </div>
@@ -1012,48 +958,21 @@ footer{
 
     <div class="grid">
 
-
         <div class="campo campo-completo">
-
-            <label>
-                Observaciones generales
-            </label>
-
-            <textarea
-                id="observacionesGenerales"
-                placeholder="Información adicional que deba aparecer en el informe..."
-            ></textarea>
-
+            <label>Observaciones generales</label>
+            <textarea id="observacionesGenerales"
+                placeholder="Información adicional que deba aparecer en el resumen ejecutivo..."></textarea>
         </div>
-
 
         <div class="campo">
-
-            <label>
-                Conclusión adicional
-            </label>
-
-            <textarea
-                id="conclusionAdicional"
-                placeholder="Conclusión adicional..."
-            ></textarea>
-
+            <label>Conclusión adicional</label>
+            <textarea id="conclusionAdicional" placeholder="Conclusión adicional..."></textarea>
         </div>
-
 
         <div class="campo">
-
-            <label>
-                Recomendación adicional
-            </label>
-
-            <textarea
-                id="recomendacionAdicional"
-                placeholder="Recomendación adicional..."
-            ></textarea>
-
+            <label>Recomendación adicional</label>
+            <textarea id="recomendacionAdicional" placeholder="Recomendación adicional..."></textarea>
         </div>
-
 
     </div>
 
@@ -1068,21 +987,11 @@ footer{
 
     <div class="titulo-tarjeta">
 
-        <div class="icono">
-            ⚙️
-        </div>
+        <div class="icono">⚙️</div>
 
         <div>
-
-            <h2>
-                Generación del informe
-            </h2>
-
-            <p>
-                El sistema buscará automáticamente las evidencias
-                almacenadas en Google Drive.
-            </p>
-
+            <h2>Generación del informe</h2>
+            <p>El sistema buscará automáticamente las evidencias almacenadas en Google Drive.</p>
         </div>
 
     </div>
@@ -1090,84 +999,38 @@ footer{
 
     <div class="botones">
 
-        <button
-            type="button"
-            id="btnConexion"
-            class="btn-secundario">
-
+        <button type="button" id="btnConexion" class="btn-secundario">
             🔌 PROBAR CONEXIÓN
-
         </button>
 
-
-        <button
-            type="button"
-            id="btnGenerar"
-            class="btn-principal">
-
+        <button type="button" id="btnGenerar" class="btn-principal">
             📄 GENERAR INFORME PDF
-
         </button>
 
     </div>
 
 
-    <div
-        id="estado"
-        class="estado">
-    </div>
+    <div id="estado" class="estado"></div>
 
 
-    <div
-        id="resultado"
-        class="resultado">
+    <div id="resultado" class="resultado">
 
-        <div class="resultado-titulo">
-
-            Informe generado correctamente
-
-        </div>
-
+        <div class="resultado-titulo">Informe generado correctamente</div>
 
         <div class="enlaces">
-
-
-            <a
-                id="linkDocumento"
-                class="enlace"
-                href="#"
-                target="_blank">
-
-                📘 Abrir Google Docs
-
-            </a>
-
-
-            <a
-                id="linkPdf"
-                class="enlace"
-                href="#"
-                target="_blank">
-
-                📄 Abrir PDF
-
-            </a>
-
-
+            <a id="linkDocumento" class="enlace" href="#" target="_blank">📘 Abrir Google Docs</a>
+            <a id="linkPdf" class="enlace" href="#" target="_blank">📄 Abrir PDF</a>
         </div>
 
     </div>
 
 
     <div class="info-iso">
-
         <strong>Control documental:</strong>
-
-        El informe es generado a partir de una plantilla controlada
-        y de las evidencias almacenadas en Google Drive.
-        El documento generado puede ser posteriormente incorporado
-        al repositorio oficial de Control Documentario.
-
+        El informe es generado a partir de una plantilla controlada y de
+        las evidencias almacenadas en Google Drive. El documento generado
+        puede ser posteriormente incorporado al repositorio oficial de
+        Control Documentario.
     </div>
 
 </div>
@@ -1177,10 +1040,7 @@ footer{
 
 
 <footer>
-
-    BROXCORP · Sistema de Gestión Documental ·
-    Generación de informes de proyectos
-
+    BROXCORP · Sistema de Gestión Documental · Generación de informes de proyectos
 </footer>
 
 
@@ -1191,19 +1051,9 @@ footer{
    CONFIGURACIÓN
 ============================================================ */
 
-
-/*
- * URL DEL GOOGLE APPS SCRIPT
- *
- * IMPORTANTE:
- * Coloca aquí la URL /exec de tu implementación.
- */
-
 const CONFIG = {
-
     APPS_SCRIPT_URL:
-        "https://script.google.com/macros/s/AKfycbxsgMiZjc3e6oUVGjSvllfrheRoDGVmdpN1BIH02BzzD2uRjQJtYWP08GTlrli1-EyE/exec"
-
+        "https://script.google.com/macros/s/AKfycbw3od3w9A5uGRXCUoZS_6zCIqzNuoN0GudsKLKrIuXjHIVrPSfxxaSaympcxjftxEy7/exec"
 };
 
 
@@ -1211,47 +1061,114 @@ const CONFIG = {
    ELEMENTOS
 ============================================================ */
 
-const btnConexion =
-    document.getElementById("btnConexion");
+const btnConexion = document.getElementById("btnConexion");
+const btnGenerar = document.getElementById("btnGenerar");
+const estado = document.getElementById("estado");
+const resultado = document.getElementById("resultado");
+const linkDocumento = document.getElementById("linkDocumento");
+const linkPdf = document.getElementById("linkPdf");
 
-const btnGenerar =
-    document.getElementById("btnGenerar");
-
-const estado =
-    document.getElementById("estado");
-
-const resultado =
-    document.getElementById("resultado");
-
-const linkDocumento =
-    document.getElementById("linkDocumento");
-
-const linkPdf =
-    document.getElementById("linkPdf");
+const listaPuntosAdicionales = document.getElementById("listaPuntosAdicionales");
+const vacioPuntos = document.getElementById("vacioPuntos");
+const btnAgregarPunto = document.getElementById("btnAgregarPunto");
 
 
 /* ============================================================
    UTILIDADES
 ============================================================ */
 
-function mostrarEstado(
-    mensaje,
-    tipo
-){
+function mostrarEstado(mensaje, tipo){
+    estado.textContent = mensaje;
+    estado.className = "estado visible " + tipo;
+}
 
-    estado.textContent =
-        mensaje;
-
-    estado.className =
-        "estado visible " + tipo;
+function ocultarResultado(){
+    resultado.classList.remove("visible");
 }
 
 
-function ocultarResultado(){
+/* ============================================================
+   PUNTOS ADICIONALES — filas dinámicas
+   ------------------------------------------------------------
+   Cada fila es independiente; se pueden agregar o quitar las
+   que se necesiten. No hay límite fijo en el código.
+============================================================ */
 
-    resultado.classList.remove(
-        "visible"
-    );
+let contadorPuntos = 0;
+
+function agregarPunto(){
+
+    contadorPuntos++;
+    const id = "punto_" + contadorPuntos;
+
+    vacioPuntos.style.display = "none";
+
+    const div = document.createElement("div");
+    div.className = "punto-adicional";
+    div.id = id;
+
+    div.innerHTML = `
+        <button type="button" class="btn-quitar" data-quitar="${id}">✕ Quitar</button>
+
+        <div class="grid">
+
+            <div class="campo campo-completo">
+                <label>Título del punto</label>
+                <input type="text" class="pa-titulo" placeholder="Ej. Verificación de instalaciones eléctricas">
+            </div>
+
+            <div class="campo campo-completo">
+                <label>Descripción / texto <span class="badge">opcional</span></label>
+                <textarea class="pa-texto" placeholder="Texto que aparecerá en el informe para este punto..."></textarea>
+            </div>
+
+            <div class="campo">
+                <label>Carpeta o enlace de fotos <span class="badge">opcional</span></label>
+                <input type="text" class="pa-fotos" placeholder="Nombre de subcarpeta o enlace de Drive">
+            </div>
+
+            <div class="campo">
+                <label>Carpeta o enlace de videos <span class="badge">opcional</span></label>
+                <input type="text" class="pa-videos" placeholder="Nombre de subcarpeta o enlace de Drive">
+            </div>
+
+        </div>
+    `;
+
+    listaPuntosAdicionales.appendChild(div);
+
+    div.querySelector("[data-quitar]").addEventListener("click", function(){
+        div.remove();
+        if(listaPuntosAdicionales.querySelectorAll(".punto-adicional").length === 0){
+            vacioPuntos.style.display = "block";
+        }
+    });
+
+}
+
+btnAgregarPunto.addEventListener("click", agregarPunto);
+
+
+function recolectarPuntosAdicionales(){
+
+    const filas = listaPuntosAdicionales.querySelectorAll(".punto-adicional");
+    const resultado = [];
+
+    filas.forEach(fila => {
+
+        const titulo = fila.querySelector(".pa-titulo").value.trim();
+        if(!titulo) return; // se ignoran filas sin título
+
+        resultado.push({
+            titulo: titulo,
+            texto: fila.querySelector(".pa-texto").value.trim(),
+            carpetaFotos: fila.querySelector(".pa-fotos").value.trim(),
+            carpetaVideos: fila.querySelector(".pa-videos").value.trim()
+        });
+
+    });
+
+    return resultado;
 
 }
 
@@ -1260,89 +1177,36 @@ function ocultarResultado(){
    PROBAR CONEXIÓN
 ============================================================ */
 
-btnConexion.addEventListener(
-    "click",
-    probarConexion
-);
-
+btnConexion.addEventListener("click", probarConexion);
 
 async function probarConexion(){
 
-    btnConexion.disabled =
-        true;
-
-    mostrarEstado(
-        "🔄 Verificando conexión con Google Apps Script...",
-        "cargando"
-    );
-
+    btnConexion.disabled = true;
+    mostrarEstado("🔄 Verificando conexión con Google Apps Script...", "cargando");
     ocultarResultado();
-
 
     try{
 
-        const respuesta =
-            await fetch(
-                CONFIG.APPS_SCRIPT_URL +
-                "?accion=ping",
-                {
-                    method:"GET",
-                    cache:"no-store"
-                }
-            );
+        const respuesta = await fetch(
+            CONFIG.APPS_SCRIPT_URL + "?accion=ping",
+            { method:"GET", cache:"no-store" }
+        );
 
+        if(!respuesta.ok) throw new Error("HTTP " + respuesta.status);
 
-        if(!respuesta.ok){
-
-            throw new Error(
-                "HTTP " +
-                respuesta.status
-            );
-
-        }
-
-
-        const data =
-            await respuesta.json();
-
+        const data = await respuesta.json();
 
         if(data.estado === "OK" || data.ok === true){
-
-            mostrarEstado(
-                "✔ Conexión correcta. Google Apps Script responde correctamente.",
-                "ok"
-            );
-
+            mostrarEstado("✔ Conexión correcta. Google Apps Script responde correctamente.", "ok");
         }else{
-
-            mostrarEstado(
-                "⚠ Google Apps Script respondió, pero no con el formato esperado.",
-                "error"
-            );
-
+            mostrarEstado("⚠ Google Apps Script respondió, pero no con el formato esperado.", "error");
         }
 
-    }
-    catch(error){
-
-        console.error(
-            "Error de conexión:",
-            error
-        );
-
-
-        mostrarEstado(
-            "❌ No se pudo conectar con Google Apps Script. " +
-            error.message,
-            "error"
-        );
-
-    }
-    finally{
-
-        btnConexion.disabled =
-            false;
-
+    }catch(error){
+        console.error("Error de conexión:", error);
+        mostrarEstado("❌ No se pudo conectar con Google Apps Script. " + error.message, "error");
+    }finally{
+        btnConexion.disabled = false;
     }
 
 }
@@ -1352,350 +1216,122 @@ async function probarConexion(){
    GENERAR INFORME
 ============================================================ */
 
-btnGenerar.addEventListener(
-    "click",
-    generarInforme
-);
-
+btnGenerar.addEventListener("click", generarInforme);
 
 async function generarInforme(){
 
     ocultarResultado();
 
-
-    /*
-     * Validaciones básicas
-     */
-
-    const codigo =
-        document.getElementById(
-            "codigo"
-        ).value.trim();
-
-
-    const nombreProyecto =
-        document.getElementById(
-            "nombreProyecto"
-        ).value.trim();
-
-
-    const sede =
-        document.getElementById(
-            "sede"
-        ).value.trim();
-
+    const codigo = document.getElementById("codigo").value.trim();
+    const nombreProyecto = document.getElementById("nombreProyecto").value.trim();
+    const sede = document.getElementById("sede").value.trim();
+    const carpetaDrive = document.getElementById("carpetaDrive").value.trim();
 
     if(!codigo){
-
-        mostrarEstado(
-            "⚠ Ingresa el código del proyecto.",
-            "error"
-        );
-
+        mostrarEstado("⚠ Ingresa el código del proyecto.", "error");
         return;
-
     }
-
 
     if(!nombreProyecto){
-
-        mostrarEstado(
-            "⚠ Ingresa el nombre del proyecto.",
-            "error"
-        );
-
+        mostrarEstado("⚠ Ingresa el nombre del proyecto.", "error");
         return;
-
     }
-
 
     if(!sede){
-
-        mostrarEstado(
-            "⚠ Ingresa la sede.",
-            "error"
-        );
-
+        mostrarEstado("⚠ Ingresa la sede.", "error");
         return;
-
     }
 
+    if(!carpetaDrive){
+        mostrarEstado("⚠ Pega el enlace de la carpeta del proyecto en Drive.", "error");
+        return;
+    }
 
-    btnGenerar.disabled =
-        true;
-
-    btnConexion.disabled =
-        true;
-
+    btnGenerar.disabled = true;
+    btnConexion.disabled = true;
 
     mostrarEstado(
         "⏳ Generando informe. El sistema está buscando las evidencias en Google Drive...",
         "cargando"
     );
 
-
-    /*
-     * ========================================================
-     * PAYLOAD
-     * ========================================================
-     *
-     * Estos datos son enviados a Google Apps Script.
-     */
-
     const datos = {
 
         proyecto: {
-
-            codigo:
-                codigo,
-
-            nombre:
-                nombreProyecto,
-
-            sede:
-                sede,
-
-            fechaEjecucion:
-                document.getElementById(
-                    "fechaEjecucion"
-                ).value.trim(),
-
-            responsable:
-                document.getElementById(
-                    "responsable"
-                ).value.trim(),
-
-            tienda:
-                document.getElementById(
-                    "tienda"
-                ).value.trim()
-
+            codigo: codigo,
+            nombre: nombreProyecto,
+            sede: sede,
+            fechaEjecucion: document.getElementById("fechaEjecucion").value.trim(),
+            responsable: document.getElementById("responsable").value.trim(),
+            tienda: document.getElementById("tienda").value.trim(),
+            carpetaDrive: carpetaDrive
         },
 
+        areaPintada: document.getElementById("areaPintada").value,
+        tipoPintura: document.getElementById("tipoPintura").value.trim(),
+        color: document.getElementById("color").value.trim(),
+        estadoFinal: document.getElementById("estadoFinal").value,
+        observacionesRestauracion: document.getElementById("observacionesRestauracion").value.trim(),
 
-        /*
-         * Datos de restauración
-         */
+        observacionesGenerales: document.getElementById("observacionesGenerales").value.trim(),
+        conclusionAdicional: document.getElementById("conclusionAdicional").value.trim(),
+        recomendacionAdicional: document.getElementById("recomendacionAdicional").value.trim(),
 
-        areaPintada:
-            document.getElementById(
-                "areaPintada"
-            ).value,
-
-        tipoPintura:
-            document.getElementById(
-                "tipoPintura"
-            ).value.trim(),
-
-        color:
-            document.getElementById(
-                "color"
-            ).value.trim(),
-
-
-        estadoFinal:
-            document.getElementById(
-                "estadoFinal"
-            ).value,
-
-
-        observacionesRestauracion:
-            document.getElementById(
-                "observacionesRestauracion"
-            ).value.trim(),
-
-
-        observacionesGenerales:
-            document.getElementById(
-                "observacionesGenerales"
-            ).value.trim(),
-
-
-        conclusionAdicional:
-            document.getElementById(
-                "conclusionAdicional"
-            ).value.trim(),
-
-
-        recomendacionAdicional:
-            document.getElementById(
-                "recomendacionAdicional"
-            ).value.trim()
+        etapasAdicionales: recolectarPuntosAdicionales()
 
     };
 
-
-    console.log(
-        "Datos enviados:",
-        datos
-    );
-
+    console.log("Datos enviados:", datos);
 
     try{
 
-        /*
-         * IMPORTANTE:
-         *
-         * No utilizar application/json.
-         *
-         * text/plain evita el preflight OPTIONS
-         * que normalmente genera problemas con Apps Script.
-         */
+        const respuesta = await fetch(CONFIG.APPS_SCRIPT_URL, {
+            method:"POST",
+            headers:{ "Content-Type":"text/plain;charset=utf-8" },
+            body: JSON.stringify(datos)
+        });
 
-        const respuesta =
-            await fetch(
-                CONFIG.APPS_SCRIPT_URL,
-                {
+        if(!respuesta.ok) throw new Error("Google Apps Script respondió HTTP " + respuesta.status);
 
-                    method:"POST",
+        const data = await respuesta.json();
+        console.log("Respuesta:", data);
 
-                    headers:{
-                        "Content-Type":
-                            "text/plain;charset=utf-8"
-                    },
-
-                    body:
-                        JSON.stringify(
-                            datos
-                        )
-
-                }
-            );
-
-
-        if(!respuesta.ok){
-
-            throw new Error(
-                "Google Apps Script respondió HTTP " +
-                respuesta.status
-            );
-
+        if(data.resultado !== "OK"){
+            throw new Error(data.mensaje || "El servidor no pudo generar el informe.");
         }
 
-
-        const data =
-            await respuesta.json();
-
-
-        console.log(
-            "Respuesta:",
-            data
-        );
-
-
-        if(
-            data.resultado !==
-            "OK"
-        ){
-
-            throw new Error(
-                data.mensaje ||
-                "El servidor no pudo generar el informe."
-            );
-
-        }
-
-
-        /*
-         * ====================================================
-         * ÉXITO
-         * ====================================================
-         */
-
-        mostrarEstado(
-            "✔ Informe generado correctamente.",
-            "ok"
-        );
-
-
-        /*
-         * Mostrar documento
-         */
+        mostrarEstado("✔ Informe generado correctamente (" + (data.totalPuntos || 0) + " puntos incluidos).", "ok");
 
         if(data.documentoUrl){
-
-            linkDocumento.href =
-                data.documentoUrl;
-
-            linkDocumento.style.display =
-                "block";
-
+            linkDocumento.href = data.documentoUrl;
+            linkDocumento.style.display = "block";
         }else{
-
-            linkDocumento.style.display =
-                "none";
-
+            linkDocumento.style.display = "none";
         }
-
-
-        /*
-         * Mostrar PDF
-         */
 
         if(data.pdfUrl){
-
-            linkPdf.href =
-                data.pdfUrl;
-
-            linkPdf.style.display =
-                "block";
-
+            linkPdf.href = data.pdfUrl;
+            linkPdf.style.display = "block";
         }else{
-
-            linkPdf.style.display =
-                "none";
-
+            linkPdf.style.display = "none";
         }
 
+        resultado.classList.add("visible");
 
-        resultado.classList.add(
-            "visible"
-        );
-
-
-    }
-    catch(error){
-
-        console.error(
-            "Error generando informe:",
-            error
-        );
-
-
-        mostrarEstado(
-            "❌ Error al generar el informe: " +
-            error.message,
-            "error"
-        );
-
-    }
-    finally{
-
-        btnGenerar.disabled =
-            false;
-
-        btnConexion.disabled =
-            false;
-
+    }catch(error){
+        console.error("Error generando informe:", error);
+        mostrarEstado("❌ Error al generar el informe: " + error.message, "error");
+    }finally{
+        btnGenerar.disabled = false;
+        btnConexion.disabled = false;
     }
 
 }
 
 
-/* ============================================================
-   CARGA INICIAL
-============================================================ */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        console.log(
-            "Sistema de informes BroxCorp iniciado."
-        );
-
-    }
-);
+document.addEventListener("DOMContentLoaded", function(){
+    console.log("Sistema de informes BROXCORP v3.0 iniciado.");
+});
 
 </script>
 
