@@ -705,6 +705,140 @@ footer{
 
 
 /* =====================================================
+   PUNTOS DEL INFORME (acordeón de los 11 puntos fijos)
+===================================================== */
+
+.etapa-item{
+
+    border:1.5px solid var(--borde);
+
+    border-radius:10px;
+
+    margin-bottom:12px;
+
+    background:#fbfcfd;
+
+    overflow:hidden;
+}
+
+
+.etapa-item summary{
+
+    list-style:none;
+
+    cursor:pointer;
+
+    padding:14px 16px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    font-family:'Poppins';
+
+    font-size:.85rem;
+
+    color:var(--azul-oscuro);
+
+    user-select:none;
+}
+
+
+.etapa-item summary::-webkit-details-marker{
+    display:none;
+}
+
+
+.etapa-item summary::before{
+
+    content:"›";
+
+    display:inline-block;
+
+    transition:transform .15s;
+
+    font-size:1.1rem;
+
+    color:var(--texto-suave);
+}
+
+
+.etapa-item[open] summary::before{
+    transform:rotate(90deg);
+}
+
+
+.etapa-numero{
+
+    width:24px;
+    height:24px;
+
+    border-radius:50%;
+
+    background:var(--azul);
+
+    color:white;
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+
+.etapa-carpeta{
+
+    margin-left:auto;
+
+    font-size:.68rem;
+
+    color:var(--texto-suave);
+
+    background:#eef3f8;
+
+    padding:3px 9px;
+
+    border-radius:20px;
+
+    white-space:nowrap;
+}
+
+
+.etapa-contenido{
+
+    padding:4px 18px 18px;
+
+    border-top:1px solid var(--borde);
+}
+
+
+.etapa-contenido label{
+
+    margin-top:14px;
+}
+
+
+.etapa-contenido label:first-child{
+    margin-top:2px;
+}
+
+
+.etapa-contenido textarea{
+
+    min-height:80px;
+}
+
+
+/* =====================================================
    RESPONSIVE
 ===================================================== */
 
@@ -846,60 +980,29 @@ footer{
 
 
 <!-- =====================================================
-     RESTAURACIÓN / PINTADO
+     PUNTOS DEL INFORME (11 puntos fijos, texto editable)
 ===================================================== -->
 
 <div class="tarjeta">
 
     <div class="titulo-tarjeta">
 
-        <div class="icono">🎨</div>
+        <div class="icono">🗂️</div>
 
         <div>
-            <h2>Restauración de fachada</h2>
-            <p>Estos datos se utilizarán para generar automáticamente el texto técnico de la sección.</p>
+            <h2>Puntos del informe</h2>
+            <p>
+                Cada punto trae un texto base ya redactado — puedes dejarlo
+                tal cual o editarlo para esta tienda en particular. Un punto
+                solo aparece en el PDF si tiene fotos/videos en Drive, o si
+                le escribiste texto (o, en Restauración, si llenaste sus
+                datos).
+            </p>
         </div>
 
     </div>
 
-
-    <div class="grid">
-
-        <div class="campo">
-            <label>Área pintada (m²)</label>
-            <input type="number" id="areaPintada" min="0" step="0.01" placeholder="Ej. 120">
-        </div>
-
-        <div class="campo">
-            <label>Tipo de pintura</label>
-            <input type="text" id="tipoPintura" placeholder="Ej. Pintura látex">
-        </div>
-
-        <div class="campo">
-            <label>Color aplicado</label>
-            <input type="text" id="color" placeholder="Ej. Blanco humo">
-        </div>
-
-        <div class="campo">
-            <label>Estado final</label>
-            <select id="estadoFinal">
-                <option value="">Seleccionar</option>
-                <option value="Conforme">Conforme</option>
-                <option value="Conforme con observaciones">Conforme con observaciones</option>
-                <option value="Pendiente">Pendiente</option>
-            </select>
-        </div>
-
-        <div class="campo campo-completo">
-            <label>
-                Observaciones de restauración
-                <span class="badge">opcional</span>
-            </label>
-            <textarea id="observacionesRestauracion"
-                placeholder="Ej. Se verificó uniformidad de acabado y ausencia de daños visibles."></textarea>
-        </div>
-
-    </div>
+    <div id="listaPuntosFijos"></div>
 
 </div>
 
@@ -907,6 +1010,7 @@ footer{
 <!-- =====================================================
      PUNTOS ADICIONALES (escalabilidad sin tocar código)
 ===================================================== -->
+
 
 <div class="tarjeta">
 
@@ -957,12 +1061,6 @@ footer{
 
 
     <div class="grid">
-
-        <div class="campo campo-completo">
-            <label>Observaciones generales</label>
-            <textarea id="observacionesGenerales"
-                placeholder="Información adicional que deba aparecer en el resumen ejecutivo..."></textarea>
-        </div>
 
         <div class="campo">
             <label>Conclusión adicional</label>
@@ -1053,8 +1151,146 @@ footer{
 
 const CONFIG = {
     APPS_SCRIPT_URL:
-        "https://script.google.com/macros/s/AKfycbxaUY55CDo48dv0fFhR7abaCYuZOgZTD5gjcVYSFjwHIA3GMltu6YgslyVvG2xsSBD-/exec"
+        "https://script.google.com/macros/s/AKfycbxsgMiZjc3e6oUVGjSvllfrheRoDGVmdpN1BIH02BzzD2uRjQJtYWP08GTlrli1-EyE/exec"
 };
+
+
+/* ============================================================
+   PUNTOS FIJOS DEL INFORME
+   ------------------------------------------------------------
+   Debe reflejar el arreglo ETAPAS de Codigo.gs (mismo id, mismo
+   orden). Si agregas una etapa nueva allá, agrégala también aquí
+   para que aparezca en el formulario. El "texto" de aquí es solo
+   el valor inicial del cuadro — lo que el usuario finalmente deja
+   escrito es lo que se envía al generar el informe.
+============================================================ */
+
+const ETAPAS_FRONTEND = [
+
+    { id:"ingreso", titulo:"Ingreso a tienda", carpeta:"00_INGRESO",
+      texto:"Se realizó el ingreso a la tienda, registrando el estado inicial del establecimiento previo al inicio de las actividades de desimplementación." },
+
+    { id:"actas", titulo:"Actas de acuerdo", carpeta:"01_ACTAS",
+      texto:"Se verificó la documentación correspondiente a las actas de acuerdo asociadas al inicio del servicio, manteniendo la trazabilidad de los registros generados." },
+
+    { id:"checklist", titulo:"Checklist de verificación", carpeta:"02_CHECKLIST",
+      texto:"Las actividades fueron verificadas mediante el checklist correspondiente al proyecto, permitiendo validar el cumplimiento de las actividades planificadas." },
+
+    { id:"desmontaje", titulo:"Desmontaje de elementos", carpeta:"03_DESMONTAJE",
+      texto:"Se ejecutó el desmontaje de los elementos correspondientes (TV, racks, ventiladores, extintores y demás mobiliario), manteniendo las condiciones de seguridad durante la intervención." },
+
+    { id:"embalaje", titulo:"Embalaje y proceso finalizado", carpeta:"04_EMBALAJE",
+      texto:"Se realizó el embalaje de los elementos retirados, dejando registro del proceso finalizado y de las condiciones en que quedaron los activos embalados." },
+
+    { id:"retiro_counter", titulo:"Retiro de counter", carpeta:"05_RETIRO_COUNTER",
+      texto:"Se realizó el retiro del counter de atención, verificando el estado del área posterior a la intervención." },
+
+    { id:"retiro_vinil", titulo:"Retiro de vinil", carpeta:"06_RETIRO_VINIL",
+      texto:"Se realizó el retiro del vinil aplicado en la tienda, verificando que la superficie quedara libre de residuos." },
+
+    { id:"restauracion", titulo:"Restauración de fachada", carpeta:"07_RESTAURACION",
+      texto:"" /* se genera automáticamente a partir de los datos de pintura, ver camposExtra abajo */ },
+
+    { id:"rotulado", titulo:"Rotulado", carpeta:"08_ROTULADO",
+      texto:"Se verificó el rotulado del establecimiento conforme a lo establecido para el cierre del proyecto." },
+
+    { id:"traslado", titulo:"Traslado de activos", carpeta:"09_TRASLADO",
+      texto:"Se realizó el traslado de los activos retirados hacia su destino final, dejando constancia del proceso realizado." },
+
+    { id:"entrega", titulo:"Entrega de tienda", carpeta:"10_ENTREGA",
+      texto:"Finalizadas las actividades, se realizó la inspección final del establecimiento y la entrega de la tienda, quedando registrada mediante acta y firma final." }
+
+];
+
+
+function renderPuntosFijos(){
+
+    const contenedor = document.getElementById("listaPuntosFijos");
+    contenedor.innerHTML = "";
+
+    ETAPAS_FRONTEND.forEach((etapa, i) => {
+
+        const details = document.createElement("details");
+        details.className = "etapa-item";
+
+        const esRestauracion = etapa.id === "restauracion";
+
+        const placeholderTexto = esRestauracion
+            ? "Déjalo vacío para generarlo automáticamente con los datos de abajo, o escribe aquí un texto propio para reemplazarlo por completo."
+            : "";
+
+        const camposExtra = !esRestauracion ? "" : `
+            <div class="grid" style="margin-top:16px;">
+
+                <div class="campo">
+                    <label>Área pintada (m²)</label>
+                    <input type="number" id="areaPintada" min="0" step="0.01" placeholder="Ej. 120">
+                </div>
+
+                <div class="campo">
+                    <label>Tipo de pintura</label>
+                    <input type="text" id="tipoPintura" placeholder="Ej. Pintura látex">
+                </div>
+
+                <div class="campo">
+                    <label>Color aplicado</label>
+                    <input type="text" id="color" placeholder="Ej. Blanco humo">
+                </div>
+
+                <div class="campo">
+                    <label>Estado final</label>
+                    <select id="estadoFinal">
+                        <option value="">Seleccionar</option>
+                        <option value="Conforme">Conforme</option>
+                        <option value="Conforme con observaciones">Conforme con observaciones</option>
+                        <option value="Pendiente">Pendiente</option>
+                    </select>
+                </div>
+
+                <div class="campo campo-completo">
+                    <label>Observaciones de restauración <span class="badge">opcional</span></label>
+                    <textarea id="observacionesRestauracion"
+                        placeholder="Ej. Se verificó uniformidad de acabado y ausencia de daños visibles."></textarea>
+                </div>
+
+            </div>
+        `;
+
+        details.innerHTML = `
+            <summary>
+                <span class="etapa-numero">${i + 1}</span>
+                <span>${etapa.titulo}</span>
+                <span class="etapa-carpeta">${etapa.carpeta}</span>
+            </summary>
+            <div class="etapa-contenido">
+                <label>Texto que aparecerá en el informe</label>
+                <textarea class="etapa-texto" data-id="${etapa.id}" placeholder="${placeholderTexto}">${etapa.texto}</textarea>
+                <span class="ayuda">Carpeta esperada en Drive: 01_FOTOS/${etapa.carpeta} y 02_VIDEOS/${etapa.carpeta}</span>
+                ${camposExtra}
+            </div>
+        `;
+
+        contenedor.appendChild(details);
+
+    });
+
+}
+
+renderPuntosFijos();
+
+
+function recolectarTextosPuntosFijos(){
+
+    const areas = document.querySelectorAll(".etapa-texto");
+    const resultado = [];
+
+    areas.forEach(area => {
+        resultado.push({ id: area.dataset.id, texto: area.value.trim() });
+    });
+
+    return resultado;
+
+}
 
 
 /* ============================================================
@@ -1273,10 +1509,10 @@ async function generarInforme(){
         estadoFinal: document.getElementById("estadoFinal").value,
         observacionesRestauracion: document.getElementById("observacionesRestauracion").value.trim(),
 
-        observacionesGenerales: document.getElementById("observacionesGenerales").value.trim(),
         conclusionAdicional: document.getElementById("conclusionAdicional").value.trim(),
         recomendacionAdicional: document.getElementById("recomendacionAdicional").value.trim(),
 
+        etapasBase: recolectarTextosPuntosFijos(),
         etapasAdicionales: recolectarPuntosAdicionales()
 
     };
